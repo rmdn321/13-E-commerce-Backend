@@ -11,14 +11,12 @@ router.get("/", (req, res) => {
     Product.findAll({ include: [{ model: Tag }] }).then(async (productData) => {
       result = productData;
 
-      for (let index = 0; index < productData.length; index++) {
-        console.log(productData[index].category_id);
+      for (let index = 0; index < productData.length; index++) {        
         await Category.findOne({
           where: {
             id: productData[index].category_id,
           },
-        }).then((category) => {
-          console.log(category);
+        }).then((category) => {         
           result[index].dataValues["category"] = category;
         });
       }
@@ -42,14 +40,12 @@ router.get("/:id", (req, res) => {
     }).then(async (productData) => {
       result = productData;
 
-      for (let index = 0; index < productData.length; index++) {
-        console.log(productData[index].category_id);
+      for (let index = 0; index < productData.length; index++) {       
         await Category.findOne({
           where: {
             id: productData[index].category_id,
           },
-        }).then((category) => {
-          console.log(category);
+        }).then((category) => {          
           result[index].dataValues["category"] = category;
         });
       }
